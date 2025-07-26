@@ -86,7 +86,7 @@ function collision(head, array) {
 }
 
 function sendScore() {
-  fetch('http://localhost:3001/score', {
+  fetch('https://spacesnake-backend.onrender.com/score', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({username, score})
@@ -96,7 +96,7 @@ function sendScore() {
 }
 
 function getLeaderboard() {
-  fetch('http://localhost:3001/leaderboard')
+  fetch('https://spacesnake-backend.onrender.com/leaderboard')
     .then(res => res.json())
     .then(data => {
       leaderboardUl.innerHTML = '';
