@@ -1,11 +1,16 @@
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const box = 20;
-let snake = [{x: 9*box, y: 10*box}];
+
+let snake = [{x: 9 * box, y: 10 * box}];
 let direction = 'DOWN'; // сразу двигаемся вниз
-let food = {x: Math.floor(Math.random()*20)*box, y: Math.floor(Math.random()*20)*box};
+let food = {
+  x: Math.floor(Math.random() * 20) * box,
+  y: Math.floor(Math.random() * 20) * box
+};
 let score = 0;
 let game;
+
 const scoreDiv = document.getElementById('score');
 const restartBtn = document.getElementById('restart');
 const leaderboardUl = document.getElementById('leaderboard');
@@ -34,11 +39,13 @@ function draw() {
   ctx.fillStyle = "#111";
   ctx.fillRect(0, 0, 400, 400);
 
+  // Рисуем змейку
   for (let i = 0; i < snake.length; i++) {
     ctx.fillStyle = i === 0 ? "#0f0" : "#0a0";
     ctx.fillRect(snake[i].x, snake[i].y, box, box);
   }
 
+  // Рисуем еду
   ctx.fillStyle = "#f00";
   ctx.fillRect(food.x, food.y, box, box);
 
@@ -54,8 +61,8 @@ function draw() {
   if (snakeX === food.x && snakeY === food.y) {
     score++;
     food = {
-      x: Math.floor(Math.random()*20)*box,
-      y: Math.floor(Math.random()*20)*box
+      x: Math.floor(Math.random() * 20) * box,
+      y: Math.floor(Math.random() * 20) * box
     };
   } else {
     snake.pop();
@@ -63,7 +70,7 @@ function draw() {
 
   let newHead = {x: snakeX, y: snakeY};
 
-  // Game over
+  // Проверка на столкновение
   if (
     snakeX < 0 || snakeY < 0 ||
     snakeX >= 400 || snakeY >= 400 ||
@@ -110,7 +117,7 @@ function getLeaderboard() {
 }
 
 restartBtn.onclick = () => {
-  snake = [{x: 9*box, y: 10*box}];
+  snake = [{x: 9 * box, y: 10 * box}];
   direction = 'DOWN';
   score = 0;
   clearInterval(game);
